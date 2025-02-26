@@ -6,46 +6,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contador de Tiempo</title>
     <style>
+        /* Estilos generales */
         body {
+            background-image: url(gatos.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 80vh;
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 10px;
+            overflow: hidden;
         }
 
         .counter-container {
             text-align: center;
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translateY(190px);
         }
 
         h1 {
             color: #333;
+            font-size: 1.5rem;
         }
 
         .time {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #f020f0;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Diseño responsivo para móviles */
+        @media (max-width: 768px) {
+            body {
+
+                background-image: url(cats.jpg) !important;
+                /* Imagen solo para móviles */
+                background-size: cover;
+                background-position: center;
+
+            }
+
+            .counter-container {
+                max-width: 300px !important;
+                /* Más pequeño en móviles */
+                width: 90% !important;
+                /* Evita que se expanda mucho */
+                padding: 0.5px !important;
+                /* Menos espacio en los bordes */
+                transform: translateY(-70%);
+            }
+
+            h1 {
+                font-size: 1.2rem !important;
+            }
+
+            .time {
+                font-size: 1.4rem !important;
+            }
+
+            p {
+                font-size: 0.9rem !important;
+            }
         }
     </style>
 </head>
 
 <body>
+    <audio autoplay loop>
+        <source src="song.mp3" type="audio/mpeg">
+        No se pudo reproducir la canción :c
+    </audio>
+
     <div class="counter-container">
         <h1>Han pasado</h1>
         <div class="time" id="timeCount"></div>
-        <p>Desde que somos Novios :) </p>
+        <p>Desde que somos novios :)</p>
     </div>
 
     <script>
-        // Fecha en la que empezaron
-        const startDate = new Date("2025-02-04T20:00:00"); // Cambia esta fecha por la fecha de inicio
+        // Fecha de inicio de la relación
+        const startDate = new Date("2025-02-04T20:00:00");
 
         function updateCounter() {
             const today = new Date();
@@ -56,7 +114,8 @@
             const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-            document.getElementById("timeCount").textContent = `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+            document.getElementById("timeCount").textContent =
+                `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
         }
 
         // Actualiza el contador cada segundo
