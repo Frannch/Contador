@@ -22,6 +22,31 @@
             overflow: hidden;
         }
 
+        /* Botón con imagen de fondo */
+        #desgraciado {
+            width: 90px;
+            /* Ajusta el tamaño del botón */
+            height: 90px;
+            background-image: url(ple.png);
+            /* Imagen de play */
+            background-repeat: no-repeat;
+            background-size: contain;
+            padding: 0;
+            border-radius: 50%;
+            border-color: transparent;
+            cursor: pointer;
+            /* Cambia el cursor al pasar sobre el botón */
+            outline: none;
+            /* Elimina el borde al hacer clic */
+            position: absolute;
+            top: 200px;
+            /* Ajusta la posición del botón */
+            left: 120px;
+            /* Ajusta la posición del botón */
+            z-index: 10;
+            /* Asegura que el botón esté sobre otros elementos */
+        }
+
         .counter-container {
             text-align: center;
             background-color: #fff;
@@ -38,7 +63,7 @@
 
         h1 {
             color: #333;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
         }
 
         .time {
@@ -49,28 +74,22 @@
         }
 
         p {
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: #666;
         }
 
         /* Diseño responsivo para móviles */
         @media (max-width: 768px) {
             body {
-
                 background-image: url(cats.jpg) !important;
-                /* Imagen solo para móviles */
-                background-size: auto;
                 background-position: center;
-
+                background-size: auto;
             }
 
             .counter-container {
                 max-width: 300px !important;
-                /* Más pequeño en móviles */
                 width: 90% !important;
-                /* Evita que se expanda mucho */
                 padding: 0.5px !important;
-                /* Menos espacio en los bordes */
                 transform: translateY(-70%);
             }
 
@@ -90,16 +109,46 @@
 </head>
 
 <body>
-    <audio autoplay loop>
+
+    <!-- Audio en silencio al principio -->
+    <audio id="myAudio" autoplay loop muted>
         <source src="song.mp3" type="audio/mpeg">
         No se pudo reproducir la canción :c
     </audio>
+
+    <!-- Botón con imagen de play -->
+    <button id="desgraciado" onclick="toggleAudio()"></button>
 
     <div class="counter-container">
         <h1>Han pasado</h1>
         <div class="time" id="timeCount"></div>
         <p>Desde que somos novios :)</p>
     </div>
+
+    <script>
+        // Variable de estado para saber si el audio está reproducido o pausado
+        let isPlaying = false;
+
+        // Función para alternar entre play y pause
+        function toggleAudio() {
+            const audio = document.getElementById('myAudio');
+            const button = document.getElementById('desgraciado');
+
+            if (isPlaying) {
+                // Pausar el audio
+                audio.pause();
+                button.style.backgroundImage = "url(ple.png)"; // Cambia a imagen de play
+            } else {
+                // Reproducir el audio
+                audio.muted = false;  // Asegura que no esté silenciado
+                audio.play();
+                button.style.backgroundImage = "url(pause.png)"; // Cambia a imagen de pausa
+            }
+
+            // Cambia el estado
+            isPlaying = !isPlaying;
+        }
+    </script>
 
     <script>
         // Fecha de inicio de la relación
